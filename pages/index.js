@@ -2,7 +2,14 @@ import Head from 'next/head'
 import Image from 'next/image'
 import styles from '../styles/Home.module.css'
 
+export const emitPageError = (error = new Error(), statusCode = 500) => {
+  error.statusCode = error.statusCode || statusCode;
+  throw error;
+};
+
 export default function Home() {
+  emitPageError(undefined, 403);
+
   return (
     <div className={styles.container}>
       <Head>
@@ -66,4 +73,8 @@ export default function Home() {
       </footer>
     </div>
   )
+}
+
+Home.getInitialProps = () => {
+  return {}
 }
